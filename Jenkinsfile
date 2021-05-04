@@ -19,6 +19,16 @@ pipeline {
                 }
             }
         }
+	stage('Run app') {
+            steps {
+              sh('forever start app.js')
+            }
+        } 
+	stage('Test app') {
+            steps {
+               sh('mocha')
+            }
+        } 
 	stage('build and push image') {
             steps {
                 script {
@@ -26,41 +36,5 @@ pipeline {
                 }
             }
         } 
-        stage('deploy') {
-            steps {
-                script {
-                    gv.deployApp() 
-			sshPublisher(
-					publishers: 
-					     [
-						     sshPublisherDesc
-						     (
-							configName: 'server2', 
-							transfers: 
-							[
-								sshTransfer(
-									cleanRemote: false, 
-									excludes: '', 
-									execCommand: 'kubectl get deployments', 
-									execTimeout: 120000, 
-									flatten: false, 
-									makeEmptyDirs: false, 
-									noDefaultExcludes: false, 
-									patternSeparator: '[, ]+', 
-									remoteDirectory: '', 
-									remoteDirectorySDF: false, 
-									removePrefix: '', 
-									sourceFiles: ''
-								)
-						], 
-						usePromotionTimestamp: false, 
-						useWorkspaceInPromotion: false, 
-						verbose: false
-						     )
-					     ]
-				    )
-                }
-            }
-        }
     }
 }

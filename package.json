@@ -12,11 +12,11 @@
   },
   "dependencies": {
     "ejs": "^3.1.5",
-    "express": "^4.15.2",
-    "forever": "^3.0.4"
+    "express": "^4.15.2"
   },
   "devDependencies": {
     "chai": "^4.3.4",
+    "forever": "^3.0.4",
     "got": "^11.3.0",
     "mocha": "^8.3.2",
     "request": "^2.88.2",
