@@ -26,7 +26,7 @@ pipeline {
         } 
 	stage('Test app') {
             steps {
-               sh('mocha')
+               sh('./node_modules/.bin/mocha')
             }
         } 
 	stage('build and push image') {
