@@ -19,16 +19,6 @@ pipeline {
                 }
             }
         }
-	stage('Run app') {
-            steps {
-              sh('forever start app.js')
-            }
-        } 
-	stage('Test app') {
-            steps {
-               sh('./node_modules/.bin/mocha')
-            }
-        } 
 	stage('build and push image') {
             steps {
                 script {
